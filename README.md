@@ -9,7 +9,7 @@ Usage instructions:
 - Download Telegram app and register https://Telegram.org
 - Talk to https://t.me/@CryptoWalletSiBot
 
-Supported coins:
+Currently supported coins:
     - LANA 
     - TAJ
     
