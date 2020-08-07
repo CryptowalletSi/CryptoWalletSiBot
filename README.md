@@ -2,6 +2,5 @@
 Telegram tipping bot
 
 TODO:
-- deposit
-- withdraw
-- tip
+- limit commands based on where they are executed (chat or group)
+- make errors more human friendly
