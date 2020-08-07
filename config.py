@@ -15,7 +15,7 @@ Available commands:
 """
 
 # Telegram bot token
-TELEGRAM_TOKEN = '1084265308:AAE4KO9J2OEc4RFG1d4SvhxxPnCMR4fo5zM'
+TELEGRAM_TOKEN = 'changeme'
 
 # Implemented coins
 COIN_SYMBOLS = ['LANA', 'TAJ']
