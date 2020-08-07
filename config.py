@@ -25,12 +25,12 @@ COIN_CONFIG = {
     'LANA': {
         'symbol': 'LANA',
         'name': 'LanaCoin',
-        'rpc_url': 'http://cryptobot:idkfa123@localhost:5706/',
+        'rpc_url': 'http://user:pass@localhost:5706/',
     },
     'TAJ': {
         'symbol': 'TAJ',
         'name': 'TajCoin',
-        'rpc_url': 'http://cryptobot:idkfa123@localhost:12107/',
+        'rpc_url': 'http://user:pass@localhost:12107/',
     },
 }
 
