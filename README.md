@@ -7,6 +7,7 @@ TODO:
 
 Usage instructions:
 - Download Telegram app and register https://Telegram.org
+- A valid telegram username is required: https://telegram.org/faq#usernames-and-telegram-me
 - Talk to https://t.me/CryptoWalletSiBot
 - Join LanaCoin telegram: https://t.me/LanaCoin 
 - Join TajCoin telegram: https://t.me/TajCoin
