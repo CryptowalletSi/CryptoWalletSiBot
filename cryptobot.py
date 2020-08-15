@@ -32,7 +32,7 @@ class Cryptobot:
         try:
             if not msg.from_user.username:
                 raise Exception("You must set a telegram username to use this bot")
-            cmd = msg.text.split()[0][1:]
+            cmd = msg.text.split()[0][1:].split("@")[0]
             if msg.chat.type != 'private' and cmd not in PUBLIC_COMMANDS:
                 raise Exception(msg.from_user.username + ", that command is only available if you talk to me privately")
             f = getattr(self, 'cmd_' + cmd, None)
@@ -99,6 +99,9 @@ class Cryptobot:
             raise Exception(f"Not enough {sym} coins in your account")
         toaddr = self.get_addr(coin, recipient)
         result = coin.request('sendfrom', [username, toaddr, amount, config.MINCONF])
+        if not result['error']:
+            bot.send_message(msg.chat_id, f"Congratulations @{recipient}, you have been tipped {amount} {sym} by @{username}")
+            return
         self.send_result(bot, update, result)
 
 if __name__ == '__main__':
