@@ -24,7 +24,13 @@ class Cryptobot:
     
     def send_result(self, bot, update, result):
         chat_id = update.message.chat_id
-        bot.send_message(chat_id, str(result))
+        try:
+            if result['error']:
+                bot.send_message(chat_id, "Error: " + result["error"]["message"])
+            else:
+                bot.send_message(chat_id, "OK")
+        except:
+            bot.send_message(chat_id, str(result))
 
     def command(self, bot, update):
         msg = update.message
@@ -92,7 +98,7 @@ class Cryptobot:
         if msg.entities[1].type != 'mention':
             raise Exception("First param must be recipient username")
         recipient = msg.text.split()[1][1:]
-        amount = float(msg.text.split()[2])
+        amount = int(msg.text.split()[2])
         sym = msg.text.split()[3].upper()
         coin = COINS[sym]
         if amount > coin.request('getbalance', [username, config.MINCONF])['result']:
