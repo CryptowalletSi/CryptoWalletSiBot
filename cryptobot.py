@@ -91,24 +91,30 @@ class Cryptobot:
     def cmd_tip(self, bot, update):
         usage_text = "How to properly tip: /tip @username <amount> <ticker>"
         msg = update.message
-        username = msg.from_user.username
-        if not msg.entities[1:]:
+        parts = msg.text.split()
+        if len(parts) < 4:
             bot.send_message(msg.chat_id, usage_text)
             return
-        if msg.entities[1].type != 'mention':
-            raise Exception("First param must be recipient username")
-        recipient = msg.text.split()[1][1:]
-        amount = int(msg.text.split()[2])
-        sym = msg.text.split()[3].upper()
+        amount = int(parts[-2])
+        sym = parts[-1].upper()
         coin = COINS[sym]
-        if amount > coin.request('getbalance', [username, config.MINCONF])['result']:
-            raise Exception(f"Not enough {sym} coins in your account")
-        toaddr = self.get_addr(coin, recipient)
-        result = coin.request('sendfrom', [username, toaddr, amount, config.MINCONF])
-        if not result['error']:
-            bot.send_message(msg.chat_id, f"Congratulations @{recipient}, you have been tipped {amount} {sym} by @{username}")
+        username = msg.from_user.username
+        recipients = []
+        for e, val in msg.parse_entities().items():
+            if e.type == 'mention':
+                recipients.append(val[1:])
+        if not recipients:
+            bot.send_message(msg.chat_id, usage_text)
             return
-        self.send_result(bot, update, result)
+        if amount * len(recipients) > coin.request('getbalance', [username, config.MINCONF])['result']:
+            raise Exception(f"Not enough {sym} coins in your account")
+        for recipient in recipients:
+            toaddr = self.get_addr(coin, recipient)
+            result = coin.request('sendfrom', [username, toaddr, amount, config.MINCONF])
+            if not result['error']:
+                bot.send_message(msg.chat_id, f"Congratulations @{recipient}, you have been tipped {amount} {sym} by @{username}")
+            else:
+                self.send_result(bot, update, result)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
