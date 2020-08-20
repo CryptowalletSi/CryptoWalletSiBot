@@ -1,4 +1,4 @@
-# CryptoWalletSiBot
+# CryptoWalletSiBot telegram wallet and on chain tiping bot
 Telegram tipping bot
 
 TODO:
