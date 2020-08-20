@@ -1,6 +1,8 @@
 import logging
 log = logging.getLogger('cryptobot')
 
+from pprint import pformat
+
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 import requests
 
@@ -8,8 +10,10 @@ import config
 from coin import COINS
 
 
-COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip']
+COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'admin']
 PUBLIC_COMMANDS = ['help', 'tip']
+ADMIN_COMMANDS = ['admin']
+
 
 class Cryptobot:
     def __init__(self, telegram_token=config.TELEGRAM_TOKEN):
@@ -39,6 +43,8 @@ class Cryptobot:
             if not msg.from_user.username:
                 raise Exception("You must set a telegram username to use this bot")
             cmd = msg.text.split()[0][1:].split("@")[0]
+            if cmd in ADMIN_COMMANDS and msg.from_user.username not in config.ADMINS:
+                return
             if msg.chat.type != 'private' and cmd not in PUBLIC_COMMANDS:
                 raise Exception(msg.from_user.username + ", that command is only available if you talk to me privately")
             f = getattr(self, 'cmd_' + cmd, None)
@@ -115,6 +121,30 @@ class Cryptobot:
                 bot.send_message(msg.chat_id, f"Congratulations @{recipient}, you have been tipped {amount} {sym} by @{username}")
             else:
                 self.send_result(bot, update, result)
+
+    def cmd_admin(self, bot, update):
+        usage_text = '\n'.join([
+            'Admin commands:',
+            '/admin balance <ticker> - show account balances'
+        ])
+        msg = update.message
+        parts = msg.text.split()
+        if len(parts) < 2:
+            bot.send_message(msg.chat_id, usage_text)
+            return
+        cmd = parts[1].lower()
+        f = getattr(self, 'adm_' + cmd, None)
+        if f:
+            f(bot, update)
+
+    def adm_balance(self, bot, update):
+        msg = update.message
+        parts = msg.text.split()
+        sym = parts[-1].upper()
+        coin = COINS[sym]
+        result = coin.request('listaccounts', [config.MINCONF])
+        bot.send_message(msg.chat_id, pformat(result))
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)

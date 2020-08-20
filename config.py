@@ -1,3 +1,5 @@
+ADMINS = []
+
 # Message returned by the bot on /start command
 BOT_START_MESSAGE = """
 Hi, welcome to CryptoWalletSiBot.
