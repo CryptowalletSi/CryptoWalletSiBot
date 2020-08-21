@@ -1,5 +1,9 @@
 # CryptoWalletSiBot telegram wallet and on chain tiping bot
 
+Configuration:
+- look at `config.py` for configuration options
+- create `local_config.py` with your custom configuration
+
 Usage instructions:
 - Download Telegram app and register https://Telegram.org
 - A valid telegram username is required: https://telegram.org/faq#usernames-and-telegram-me (If you change your telegram username you will loose access to your coins)
