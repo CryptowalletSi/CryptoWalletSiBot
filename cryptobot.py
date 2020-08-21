@@ -100,9 +100,11 @@ class Cryptobot:
 
     def _parse_amount(self, msg, idx):
         parts = msg.text.split()
-        if idx >= len(parts):
+        amount = None
+        try:
+            amount = parts[idx]
+        except IndexError:
             raise ShowUsage()
-        amount = parts[idx]
         try:
             return int(amount)
         except:
@@ -165,8 +167,8 @@ class Cryptobot:
         parts = msg.text.split()
         if len(parts) < 4:
             raise ShowUsage("How to properly tip:\n")
-        amount = self._parse_amount(msg, -2)
         sym, coin = self._parse_sym_coin(msg, -1)
+        amount = self._parse_amount(msg, -2)
         username = msg.from_user.username
         recipients = []
         for e, val in msg.parse_entities().items():
@@ -174,6 +176,11 @@ class Cryptobot:
                 recipients.append(val[1:])
         if not recipients:
             raise ShowUsage()
+        if len(parts) > len(recipients) + 3:
+            raise ShowUsage()
+        recipients = set(recipients)
+        if username in recipients:
+            raise Exception(f"\nPhase 1: @{username} tips themself\nPhase 2: ???\nPhase 3: Profit!")
         if amount * len(recipients) > coin.request('getbalance', [username, config.MINCONF])['result']:
             raise Exception(f"Not enough {sym} coins in your account")
         for recipient in recipients:

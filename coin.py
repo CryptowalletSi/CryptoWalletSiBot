@@ -19,7 +19,7 @@ class Coin:
         result = requests.post(self.rpc_url, data=json.dumps(data)).json()
         log.debug("request_result:" + str(result))
         if result.get('error'):
-            raise RpcError(result['error'])
+            raise RpcError(result['error'].get('message', 'Unknown RPC error'))
         return result
 
 
