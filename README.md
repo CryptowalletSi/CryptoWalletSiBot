@@ -1,4 +1,4 @@
-# CryptoWalletSiBot telegram wallet and on chain tiping bot
+## CryptoWalletSiBot telegram wallet and on chain tiping bot
 
 Configuration:
 - look at `config.py` for configuration options
