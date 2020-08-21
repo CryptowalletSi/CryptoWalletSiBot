@@ -12,7 +12,7 @@ Available commands:
     /start - shows this message
     /balance <coin> - show balance
     /deposit <coin> - get deposit address
-    /withdraw <coin> <addr> - withdraw your coins
+    /withdraw <amount> <coin> <addr> - withdraw your coins
     /tip <@user> <amount> <coin> - tip user
 """
 
