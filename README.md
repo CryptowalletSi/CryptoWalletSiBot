@@ -1,9 +1,4 @@
 # CryptoWalletSiBot telegram wallet and on chain tiping bot
-Telegram tipping bot
-
-TODO:
-- limit commands based on where they are executed (chat or group)
-- make errors more human friendly
 
 Usage instructions:
 - Download Telegram app and register https://Telegram.org
@@ -13,8 +8,8 @@ Usage instructions:
 - Join TajCoin telegram: https://t.me/TajCoin
 
 Currently supported coins (Not tokens! Native coins on their own blockchains):
-    - LANA 
-    - TAJ
+- LANA 
+- TAJ
     
 Available commands:
 * /start - shows this message
