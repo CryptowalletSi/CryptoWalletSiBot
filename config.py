@@ -1,3 +1,4 @@
+# Telegram usernames of bot admins
 ADMINS = []
 
 # Message returned by the bot on /start command
@@ -7,6 +8,7 @@ Hi, welcome to CryptoWalletSiBot.
 Supported coins:
     - LANA
     - TAJ
+    - OCP
 
 Available commands:
     /start - shows this message
@@ -20,7 +22,7 @@ Available commands:
 TELEGRAM_TOKEN = 'changeme'
 
 # Implemented coins
-COIN_SYMBOLS = ['LANA', 'TAJ']
+COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP']
 
 # Coin configuration
 COIN_CONFIG = {
@@ -33,6 +35,11 @@ COIN_CONFIG = {
         'symbol': 'TAJ',
         'name': 'TajCoin',
         'rpc_url': 'http://user:pass@localhost:12107/',
+    },
+    'OCP': {
+        'symbol': 'OCP',
+        'name': 'OC Protocol',
+        'rpc_url': 'http://user:pass@localhost:8882/',
     },
 }
 
