@@ -4,7 +4,7 @@ log = logging.getLogger('cryptobot')
 from pprint import pformat
 
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, CallbackQueryHandler
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
 import requests
 
@@ -135,8 +135,11 @@ class Cryptobot:
         return self.cmd_start(bot, update)
 
     def cmd_start(self, bot, update):
-        chat_id = update.message.chat_id
-        bot.send_message(chat_id, config.BOT_START_MESSAGE)
+        msg = update.message
+        #chat_id = update.message.chat_id
+        #bot.send_message(chat_id, config.BOT_START_MESSAGE)
+        keyboard = ReplyKeyboardMarkup([[InlineKeyboardButton('/' + cmd, callback_data='/' + cmd) for cmd in ('balance', 'deposit', 'withdraw')]])
+        msg.reply_text(config.BOT_START_MESSAGE, reply_markup=keyboard)
 
     def cmd_balance(self, bot, update):
         msg = update.message
