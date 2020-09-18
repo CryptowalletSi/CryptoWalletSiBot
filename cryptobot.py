@@ -3,14 +3,16 @@ log = logging.getLogger('cryptobot')
 
 from pprint import pformat
 
-from telegram.ext import Updater, InlineQueryHandler, CommandHandler
+from telegram.ext import Updater, InlineQueryHandler, CommandHandler, CallbackQueryHandler
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
 import requests
 
 import config
 from coin import get_coin
 from errors import ShowUsage, UnknownTicker, RpcError
 
-COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'admin']
+COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'admin', 'test1']
 PUBLIC_COMMANDS = ['help', 'tip']
 ADMIN_COMMANDS = ['admin']
 
@@ -48,6 +50,7 @@ class Cryptobot:
         self.updater = Updater(self.telegram_token)
         for cmd in COMMANDS:
             self.updater.dispatcher.add_handler(CommandHandler(cmd, self.command))
+        self.updater.dispatcher.add_handler(CallbackQueryHandler(self.command))
 
     def loop(self):
         self.updater.start_polling()
@@ -64,6 +67,12 @@ class Cryptobot:
             bot.send_message(chat_id, str(result))
 
     def command(self, bot, update):
+        if update.callback_query:
+            #globals().update({'update': update})
+            #bot.send_message(update.callback_query.message.chat_id, str(update.__dict__))
+            update.message = update.callback_query.message
+            update.message.text = update.callback_query.data
+            update.message.from_user = update.callback_query.from_user
         msg = update.message
         chat_id = msg.chat_id
         cmd = None
@@ -132,7 +141,12 @@ class Cryptobot:
     def cmd_balance(self, bot, update):
         msg = update.message
         username = msg.from_user.username
-        sym, coin = self._parse_sym_coin(msg, 1)
+        try:
+            sym, coin = self._parse_sym_coin(msg, 1)
+        except ShowUsage:
+            keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(sym, callback_data='/balance ' + sym) for sym in config.COIN_SYMBOLS]])
+            msg.reply_text("Choose coin:", reply_markup=keyboard)
+            return
         amount = int(coin.request('getbalance', [username, config.MINCONF])['result'])
         bot.send_message(msg.chat_id, f"You have {amount} {sym}")
 
@@ -146,7 +160,13 @@ class Cryptobot:
     def cmd_deposit(self, bot, update):
         msg = update.message
         username = msg.from_user.username
-        sym, coin = self._parse_sym_coin(msg, 1)
+        try:
+            sym, coin = self._parse_sym_coin(msg, 1)
+        except ShowUsage:
+            keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(sym, callback_data='/deposit ' + sym) for sym in config.COIN_SYMBOLS]])
+            msg.reply_text("Choose the coin you want to deposit:", reply_markup=keyboard)
+            return
+                                 
         addr = self.get_addr(coin, username)
         bot.send_message(msg.chat_id, f"Deposit {sym} to {addr}")
 
@@ -200,6 +220,12 @@ class Cryptobot:
         sym, coin = self._parse_sym_coin(msg, -1)
         result = coin.request('listaccounts', [config.MINCONF])
         bot.send_message(msg.chat_id, pformat(result))
+
+    def cmd_test1(self, bot, update):
+        msg = update.message
+        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton('LANA', callback_data='/balance LANA')]])
+        msg.reply_text("Choose coin:", reply_markup=keyboard)
+        #bot.send_message(msg.chat_id, "test1")
 
 
 if __name__ == '__main__':
