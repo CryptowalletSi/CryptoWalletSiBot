@@ -9,6 +9,7 @@ Supported coins:
     - LANA
     - TAJ
     - OCP
+    - ARCO
 
 Available commands:
     /start - shows this message
@@ -22,7 +23,7 @@ Available commands:
 TELEGRAM_TOKEN = 'changeme'
 
 # Implemented coins
-COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP']
+COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO']
 
 # Coin configuration
 COIN_CONFIG = {
@@ -40,6 +41,11 @@ COIN_CONFIG = {
         'symbol': 'OCP',
         'name': 'OC Protocol',
         'rpc_url': 'http://user:pass@localhost:8882/',
+    },
+    'ARCO': {
+        'symbol': 'ARCO',
+        'name': 'AquariusCoin',
+        'rpc_url': 'http://user:pass@localhost:6206/',
     },
 }
 
