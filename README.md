@@ -10,10 +10,16 @@ Usage instructions:
 - Talk to https://t.me/CryptoWalletSiBot
 - Join LanaCoin telegram: https://t.me/LanaCoin 
 - Join TajCoin telegram: https://t.me/TajCoin
+- Join AquariusCoin telegram: https://t.me/AquariusCoin
+- Join OCProtocol telegram: https://t.me/OCProtocol_OCP
+- Join CryptoWalletSi telegram: https://t.me/CryptoWalletSi
+
 
 Currently supported coins (Not tokens! Native coins on their own blockchains):
 - LANA 
 - TAJ
+- OCP
+- ARCO
     
 Available commands:
 * `/start`
