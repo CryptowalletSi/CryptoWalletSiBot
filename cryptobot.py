@@ -43,6 +43,8 @@ COMMAND_CONFIG = {
     },
 }
 
+TIP_DECIMAL_PLACES = 4
+
 
 class Cryptobot:
     def __init__(self, telegram_token=config.TELEGRAM_TOKEN):
@@ -115,9 +117,12 @@ class Cryptobot:
         except IndexError:
             raise ShowUsage()
         try:
-            return int(amount)
+            return self._format_amount(amount)
         except:
             raise Exception(f'Invalid amount: {amount}')
+
+    def _format_amount(self, amount):
+        return int(float(amount) * (10**TIP_DECIMAL_PLACES)) / (10**TIP_DECIMAL_PLACES)
 
     def _parse_addr(self, msg, idx):
         try:
@@ -150,7 +155,7 @@ class Cryptobot:
             keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(sym, callback_data='/balance ' + sym) for sym in config.COIN_SYMBOLS]])
             msg.reply_text("Choose coin:", reply_markup=keyboard)
             return
-        amount = int(coin.request('getbalance', [username, config.MINCONF])['result'])
+        amount = self._format_amount(coin.request('getbalance', [username, config.MINCONF])['result'])
         bot.send_message(msg.chat_id, f"You have {amount} {sym}")
 
     def get_addr(self, coin, username):
@@ -179,7 +184,7 @@ class Cryptobot:
         amount = self._parse_amount(msg, 1)
         sym, coin = self._parse_sym_coin(msg, 2)
         toaddr = self._parse_addr(msg, 3)
-        balance = int(coin.request('getbalance', [username, config.MINCONF])['result'])
+        balance = self._format_amount(coin.request('getbalance', [username, config.MINCONF])['result'])
         if amount > balance:
             raise Exception(f"You only have {balance} {sym}.")
         result = coin.request('sendfrom', [username, toaddr, amount, config.MINCONF])
@@ -190,17 +195,20 @@ class Cryptobot:
         parts = msg.text.split()
         if len(parts) < 4:
             raise ShowUsage("How to properly tip:\n")
-        sym, coin = self._parse_sym_coin(msg, -1)
-        amount = self._parse_amount(msg, -2)
-        username = msg.from_user.username
+        
         recipients = []
-        for e, val in msg.parse_entities().items():
-            if e.type == 'mention':
-                recipients.append(val[1:])
+        for i in range(1, len(parts)):
+            if parts[i].startswith('@'):
+                recipients.append(parts[i])
+            else:
+                break
         if not recipients:
             raise ShowUsage()
-        if len(parts) > len(recipients) + 3:
-            raise ShowUsage()
+
+        username = msg.from_user.username
+        amount = self._parse_amount(msg, i)
+        sym, coin = self._parse_sym_coin(msg, i + 1)
+        
         recipients = set(recipients)
         if username in recipients:
             raise Exception(f"\nPhase 1: @{username} tips themself\nPhase 2: ???\nPhase 3: Profit!")
