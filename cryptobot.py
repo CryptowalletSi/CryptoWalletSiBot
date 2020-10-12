@@ -1,10 +1,12 @@
 import logging
 log = logging.getLogger('cryptobot')
 
+import time
 from pprint import pformat
 
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, CallbackQueryHandler
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import ParseMode
 
 import requests
 
@@ -12,8 +14,8 @@ import config
 from coin import get_coin
 from errors import ShowUsage, UnknownTicker, RpcError
 
-COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'admin', 'test1']
-PUBLIC_COMMANDS = ['help', 'tip']
+COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'price', 'admin', 'test1']
+PUBLIC_COMMANDS = ['help', 'tip', 'price']
 ADMIN_COMMANDS = ['admin']
 
 COMMAND_CONFIG = {
@@ -34,6 +36,9 @@ COMMAND_CONFIG = {
     },
     'tip': {
         'usage': '/tip <@username> <amount> <ticker>',
+    },
+    'price': {
+        'usage': '/price <ticker>',
     },
     'admin': {
         'usage': '\n'.join([
@@ -177,6 +182,7 @@ class Cryptobot:
                                  
         addr = self.get_addr(coin, username)
         bot.send_message(msg.chat_id, f"Deposit {sym} to {addr}")
+        bot.send_photo(msg.chat_id, f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={addr}")
 
     def cmd_withdraw(self, bot, update):
         msg = update.message
@@ -199,7 +205,7 @@ class Cryptobot:
         recipients = []
         for i in range(1, len(parts)):
             if parts[i].startswith('@'):
-                recipients.append(parts[i])
+                recipients.append(parts[i][1:])
             else:
                 break
         if not recipients:
@@ -218,6 +224,23 @@ class Cryptobot:
             toaddr = self.get_addr(coin, recipient)
             result = coin.request('sendfrom', [username, toaddr, amount, config.MINCONF])
             bot.send_message(msg.chat_id, f"Congratulations @{recipient}, you have been tipped {amount} {sym} by @{username}")
+
+    def _get_prices(self, sym):
+        p = config.COIN_PRICE[sym]()
+        p_btc = config.COIN_PRICE['BTC']()
+        if p[1] == 'USD':
+            return [p, (int(p[0] / p_btc[0] * (10**8) * 100) / 100, 'sats')]
+        elif p[1] == 'BTC':
+            return [(p[0] * p_btc[0], 'USD'), (int(p[0] * (10**8) * 100) / 100, 'sats')]
+
+    def cmd_price(self, bot, update):
+        msg = update.message
+        syms = config.GROUP_COINS.get(msg.chat.username, [])
+        s = ""
+        for sym in syms:
+            prices = self._get_prices(sym)
+            s += ('1 {} = '.format(sym) + ' or '.join('<b>{} {}</b>'.format(p[0], p[1]) for p in prices) + '\n')
+        bot.send_message(msg.chat_id, text=s, parse_mode=ParseMode.HTML)
 
     def cmd_admin(self, bot, update):
         msg = update.message

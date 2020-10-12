@@ -1,3 +1,5 @@
+import requests
+
 # Telegram usernames of bot admins
 ADMINS = []
 
@@ -47,6 +49,18 @@ COIN_CONFIG = {
         'name': 'AquariusCoin',
         'rpc_url': 'http://user:pass@localhost:6206/',
     },
+}
+
+# Coin price fetching functions
+COIN_PRICE = {
+    'BTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/btcusdt/").json()['last']), 'USD'),    
+    'LANA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/lanausdt/").json()['last']), 'USD'),
+    'TAJ': lambda: (float(requests.get("https://api.tokens.net/public/ticker/tajbtc/").json()['last']), 'BTC'),
+}
+
+GROUP_COINS = {
+    None: ['BTC', 'LANA', 'TAJ'],
+    'LanaCoin': ['LANA'],
 }
 
 # Minimum confirmed blocks when calculating account balances
