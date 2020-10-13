@@ -56,11 +56,18 @@ COIN_PRICE = {
     'BTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/btcusdt/").json()['last']), 'USD'),    
     'LANA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/lanausdt/").json()['last']), 'USD'),
     'TAJ': lambda: (float(requests.get("https://api.tokens.net/public/ticker/tajbtc/").json()['last']), 'BTC'),
+    'ARCO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/arcobtc/").json()['last']), 'BTC'),
+    'NETKO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/netkousdt/").json()['last']), 'USD'),
+    'NEVA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/nevausdt/").json()['last']), 'USD'),
 }
 
 GROUP_COINS = {
-    None: ['BTC', 'LANA', 'TAJ'],
+    None: ['BTC', 'LANA', 'TAJ', 'ARCO', 'NETKO', 'NEVA'],
     'LanaCoin': ['LANA'],
+    'TajCoin': ['TAJ'],
+    'AquariusCoin': ['ARCO'],
+    'NetkoCoin': ['NETKO'],
+    'neva_coin': ['NEVA'],
 }
 
 # Minimum confirmed blocks when calculating account balances

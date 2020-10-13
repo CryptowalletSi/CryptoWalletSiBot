@@ -13,6 +13,8 @@ import requests
 import config
 from coin import get_coin
 from errors import ShowUsage, UnknownTicker, RpcError
+from util import round_price
+
 
 COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'price', 'admin', 'test1']
 PUBLIC_COMMANDS = ['help', 'tip', 'price']
@@ -229,9 +231,9 @@ class Cryptobot:
         p = config.COIN_PRICE[sym]()
         p_btc = config.COIN_PRICE['BTC']()
         if p[1] == 'USD':
-            return [p, (int(p[0] / p_btc[0] * (10**8) * 100) / 100, 'sats')]
+            return [(round_price(p[0]), p[1]), (int(p[0] / p_btc[0] * (10**8) * 100) / 100, 'sats')]
         elif p[1] == 'BTC':
-            return [(p[0] * p_btc[0], 'USD'), (int(p[0] * (10**8) * 100) / 100, 'sats')]
+            return [(round_price(p[0] * p_btc[0]), 'USD'), (int(p[0] * (10**8) * 100) / 100, 'sats')]
 
     def cmd_price(self, bot, update):
         msg = update.message
