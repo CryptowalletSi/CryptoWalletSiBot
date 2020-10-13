@@ -184,7 +184,8 @@ class Cryptobot:
                                  
         addr = self.get_addr(coin, username)
         bot.send_message(msg.chat_id, f"Deposit {sym} to {addr}")
-        bot.send_photo(msg.chat_id, f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={addr}")
+        #bot.send_photo(msg.chat_id, f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={addr}")
+        bot.send_photo(msg.chat_id, f"https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={addr}")
 
     def cmd_withdraw(self, bot, update):
         msg = update.message
@@ -238,7 +239,7 @@ class Cryptobot:
     def cmd_price(self, bot, update):
         msg = update.message
         syms = config.GROUP_COINS.get(msg.chat.username, [])
-        s = ""
+        s = "Prices from <i>Tokens.net</i>\n"
         for sym in syms:
             prices = self._get_prices(sym)
             s += ('1 {} = '.format(sym) + ' or '.join('<b>{} {}</b>'.format(p[0], p[1]) for p in prices) + '\n')

@@ -4,7 +4,7 @@ log = logging.getLogger('util')
 def round_price(p):
     places = 2
     if p < 0.1:
-        places = 3
+        places = 4
     if p < 0.001:
         places = 5
     if p < 0.0001:

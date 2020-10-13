@@ -12,6 +12,7 @@ Supported coins:
     - TAJ
     - OCP
     - ARCO
+    - NETKO
 
 Available commands:
     /start - shows this message
@@ -25,7 +26,7 @@ Available commands:
 TELEGRAM_TOKEN = 'changeme'
 
 # Implemented coins
-COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO']
+COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO']
 
 # Coin configuration
 COIN_CONFIG = {
@@ -49,16 +50,21 @@ COIN_CONFIG = {
         'name': 'AquariusCoin',
         'rpc_url': 'http://user:pass@localhost:6206/',
     },
+    'NETKO': {
+        'symbol': 'NETKO',
+        'name': 'Netko',
+        'rpc_url': 'http://user:pass@localhost:25970',
+    },
 }
 
 # Coin price fetching functions
 COIN_PRICE = {
-    'BTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/btcusdt/").json()['last']), 'USD'),    
-    'LANA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/lanausdt/").json()['last']), 'USD'),
-    'TAJ': lambda: (float(requests.get("https://api.tokens.net/public/ticker/tajbtc/").json()['last']), 'BTC'),
-    'ARCO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/arcobtc/").json()['last']), 'BTC'),
-    'NETKO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/netkousdt/").json()['last']), 'USD'),
-    'NEVA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/nevausdt/").json()['last']), 'USD'),
+    'BTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/btcusdt/").json()['ask']), 'USD'),    
+    'LANA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/lanausdt/").json()['ask']), 'USD'),
+    'TAJ': lambda: (float(requests.get("https://api.tokens.net/public/ticker/tajbtc/").json()['ask']), 'BTC'),
+    'ARCO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/arcobtc/").json()['ask']), 'BTC'),
+    'NETKO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/netkousdt/").json()['ask']), 'USD'),
+    'NEVA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/nevausdt/").json()['ask']), 'USD'),
 }
 
 GROUP_COINS = {
