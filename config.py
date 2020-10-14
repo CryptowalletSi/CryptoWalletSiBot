@@ -13,6 +13,7 @@ Supported coins:
     - OCP
     - ARCO
     - NETKO
+    - NEVA
 
 Available commands:
     /start - shows this message
@@ -26,7 +27,7 @@ Available commands:
 TELEGRAM_TOKEN = 'changeme'
 
 # Implemented coins
-COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO']
+COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO', 'NEVA']
 
 # Coin configuration
 COIN_CONFIG = {
@@ -54,6 +55,11 @@ COIN_CONFIG = {
         'symbol': 'NETKO',
         'name': 'Netko',
         'rpc_url': 'http://user:pass@localhost:25970',
+    },
+    'NEVA': {
+        'symbol': 'NEVA',
+        'name': 'NevaCoin',
+        'rpc_url': 'http://user:pass@localhost:3791',
     },
 }
 

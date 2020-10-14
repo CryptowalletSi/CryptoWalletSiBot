@@ -16,8 +16,8 @@ from errors import ShowUsage, UnknownTicker, RpcError
 from util import round_price
 
 
-COMMANDS = ['help', 'start', 'balance', 'deposit', 'withdraw', 'tip', 'price', 'admin', 'test1']
-PUBLIC_COMMANDS = ['help', 'tip', 'price']
+COMMANDS = ['start', 'balance', 'deposit', 'withdraw', 'tip', 'price', 'admin', 'test1']
+PUBLIC_COMMANDS = ['tip', 'price']
 ADMIN_COMMANDS = ['admin']
 
 COMMAND_CONFIG = {
