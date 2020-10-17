@@ -18,12 +18,12 @@ Usage instructions:
 
 
 Currently supported coins (Not tokens! Native coins on their own blockchains):
-- LANA 
-- TAJ
-- OCP
-- ARCO
-- NETKO
-- NEVA
+- LANA  https://github.com/LanaCoin/lanacoin
+- TAJ https://github.com/Taj-Coin/tajcoin
+- OCP https://github.com/OC-CryptoCurrency/OCP
+- ARCO https://github.com/AquariusNetwork/ARCO
+- NETKO https://github.com/NetkoCoin/netko
+- NEVA https://github.com/Nevacoin/nevacoin
     
 Available commands:
 * `/start`
@@ -31,5 +31,6 @@ Available commands:
 * `/deposit <coin>` - get deposit address
 * `/withdraw <amount> <coin> <addr>` - withdraw your coins
 * `/tip <@user> <amount> <coin>` - tip user
+* `/price <ticker>` - show price in usdt and sats powered by Tokens.net API
     
 Notice: Bot/Wallet is still in development/testing stage. Do not store large amounts of coin on wallet, only what you want to have handy for tips.
