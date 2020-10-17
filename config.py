@@ -83,6 +83,13 @@ GROUP_COINS = {
     'neva_coin': ['NEVA'],
 }
 
+# Group specific config
+GROUP_CONFIG = {
+    'TokensNetExchange': {
+        'command_blacklist': ['tip'],
+    },
+}
+
 # Minimum confirmed blocks when calculating account balances
 MINCONF = 0
 
