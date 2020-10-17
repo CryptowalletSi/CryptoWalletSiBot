@@ -229,7 +229,16 @@ class Cryptobot:
             bot.send_message(msg.chat_id, f"Congratulations @{recipient}, you have been tipped {amount} {sym} by @{username}")
 
     def _get_prices(self, sym):
-        p = config.COIN_PRICE[sym]()
+        try:
+            p = config.COIN_PRICE[sym]()
+        except:
+            try:
+                p = (float(requests.get("https://api.tokens.net/public/ticker/{}usdt/".format(sym.lower())).json()['ask']), 'USD')
+            except:
+                try:
+                    p = (float(requests.get("https://api.tokens.net/public/ticker/{}btc/".format(sym.lower())).json()['ask']), 'BTC')
+                except:
+                    raise Exception(f'Unknown ticker: {sym}')
         p_btc = config.COIN_PRICE['BTC']()
         if p[1] == 'USD':
             return [(round_price(p[0]), p[1]), (int(p[0] / p_btc[0] * (10**8) * 100) / 100, 'sats')]
@@ -238,8 +247,12 @@ class Cryptobot:
 
     def cmd_price(self, bot, update):
         msg = update.message
-        syms = config.GROUP_COINS.get(msg.chat.username, [])
-        s = "Prices from <i>Tokens.net</i>\n"
+        syms = [x.upper() for x in msg.text.split()[1:]]
+        if not syms:
+            syms = config.GROUP_COINS.get(msg.chat.username, [])
+        if not syms:
+            raise ShowUsage()
+        s = 'Prices from <a href="https://platform.tokens.net/register/?r=51649F"><i>Tokens.net</i></a>\n'
         for sym in syms:
             prices = self._get_prices(sym)
             s += ('1 {} = '.format(sym) + ' or '.join('<b>{} {}</b>'.format(p[0], p[1]) for p in prices) + '\n')

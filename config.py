@@ -73,6 +73,7 @@ COIN_PRICE = {
     'NEVA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/nevausdt/").json()['ask']), 'USD'),
 }
 
+# Prices to display on /price command
 GROUP_COINS = {
     None: ['BTC', 'LANA', 'TAJ', 'ARCO', 'NETKO', 'NEVA'],
     'LanaCoin': ['LANA'],
