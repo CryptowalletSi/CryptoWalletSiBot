@@ -89,14 +89,28 @@ GROUP_COINS = {
 # Group specific config
 GROUP_CONFIG = {
     'TokensNetExchange': {
-        'command_blacklist': ['tip'],
+        'command_blacklist': [],
     },
 }
 
 # Groups where captcha feature is active
-CAPTCHA_GROUPS = ['botektest', 'OCProtocol_OCP']
+CAPTCHA_GROUPS = ['botektest', 'OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin', 'NetkoCoin', 'neva_coin']
 
-CAPTCHA_SECONDS = 3 * 60
+# Seconds until new user is kicked from a group
+CAPTCHA_SECONDS = 1 * 60
+
+# Captcha specific messages
+CAPTCHA_MESSAGES = {
+    None: {
+        'new_user': "Hi {name}, please click the button below in {secs} seconds to verify you are not a bot:",
+        'button': "I am not a bot",
+        'user_verified': "Welcome to the group, {name}",
+        'user_kicked': "",
+    },
+    'botektest': {
+        'button': "Happy human button",
+    },
+}
 
 
 try:
