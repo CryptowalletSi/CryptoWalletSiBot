@@ -94,7 +94,7 @@ GROUP_CONFIG = {
 }
 
 # Groups where captcha feature is active
-CAPTCHA_GROUPS = ['botektest', 'OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin', 'NetkoCoin', 'neva_coin']
+CAPTCHA_GROUPS = ['botektest', 'CryptoWaterSi', 'TokensNetExchange', 'OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin', 'NetkoCoin', 'neva_coin']
 
 # Seconds until new user is kicked from a group
 CAPTCHA_SECONDS = 1 * 60
