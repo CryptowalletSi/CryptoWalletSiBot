@@ -4,7 +4,7 @@ log = logging.getLogger('cryptobot')
 import time
 from pprint import pformat
 
-from telegram.ext import Updater, InlineQueryHandler, CommandHandler, CallbackQueryHandler
+from telegram.ext import Updater, Filters, InlineQueryHandler, CommandHandler, CallbackQueryHandler, MessageHandler
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import ParseMode
 
@@ -14,11 +14,13 @@ import config
 from coin import get_coin
 from errors import ShowUsage, UnknownTicker, RpcError
 from util import round_price
+import captcha
 
 
 COMMANDS = ['start', 'balance', 'deposit', 'withdraw', 'tip', 'price', 'admin', 'test1']
-PUBLIC_COMMANDS = ['tip', 'price']
+PUBLIC_COMMANDS = ['tip', 'price', 'captcha']
 ADMIN_COMMANDS = ['admin']
+ANON_COMMANDS = ['captcha']
 
 COMMAND_CONFIG = {
     'help': {
@@ -53,15 +55,17 @@ COMMAND_CONFIG = {
 TIP_DECIMAL_PLACES = 4
 
 
-class Cryptobot:
+class Cryptobot(captcha.CaptchaMixin):
     def __init__(self, telegram_token=config.TELEGRAM_TOKEN):
         self.telegram_token = telegram_token
         self.updater = Updater(self.telegram_token)
         for cmd in COMMANDS:
             self.updater.dispatcher.add_handler(CommandHandler(cmd, self.command))
         self.updater.dispatcher.add_handler(CallbackQueryHandler(self.command))
-
+        self.updater.dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, self.new_chat_members_event))
+    
     def loop(self):
+        captcha.start_thread()
         self.updater.start_polling()
         self.updater.idle()
     
@@ -84,10 +88,10 @@ class Cryptobot:
         chat_id = msg.chat_id
         cmd = None
         try:
-            if not msg.from_user.username:
-                raise Exception("You must set a telegram username to use this bot")
-            
             cmd = msg.text.split()[0][1:].split("@")[0]
+            
+            if cmd not in ANON_COMMANDS and not msg.from_user.username:
+                raise Exception("You must set a telegram username to use this bot")
             
             if cmd in ADMIN_COMMANDS and msg.from_user.username not in config.ADMINS:
                 return

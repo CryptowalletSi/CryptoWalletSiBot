@@ -26,6 +26,9 @@ Available commands:
 # Telegram bot token
 TELEGRAM_TOKEN = 'changeme'
 
+# Minimum confirmed blocks when calculating account balances
+MINCONF = 0
+
 # Implemented coins
 COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO', 'NEVA']
 
@@ -90,9 +93,10 @@ GROUP_CONFIG = {
     },
 }
 
-# Minimum confirmed blocks when calculating account balances
-MINCONF = 0
+# Groups where captcha feature is active
+CAPTCHA_GROUPS = ['botektest', 'OCProtocol_OCP']
 
+CAPTCHA_SECONDS = 3 * 60
 
 
 try:
