@@ -33,7 +33,7 @@ Notice: Bot/Wallet is still in development/testing stage. Do not store large amo
 Bot is experimental open source software so keep that in mind. Bot wallet is not your long term coin storage, personal vault.... Use it for micropayments and telegram tips.
 
 - Support the developers of this bot:
- - LANA: LTyzH1NXqZ4aZE532cNw9epPMsoHwvs3xE
- - BTC: 1BVENkHRH9p1UXJREmzV9HnKAMU5enfgMD
- - ETH and erc20 tokens: 0x0Dcd1f24D9904a5C926F39CA8c012665f8Ec5FEF
- - BCH: qpessyw3ds7rs22sn99gvvuks3f6jkmm7gy2npd9r5
+  - LANA: LTyzH1NXqZ4aZE532cNw9epPMsoHwvs3xE
+  - BTC: 1BVENkHRH9p1UXJREmzV9HnKAMU5enfgMD
+  - ETH and erc20 tokens: 0x0Dcd1f24D9904a5C926F39CA8c012665f8Ec5FEF
+  - BCH: qpessyw3ds7rs22sn99gvvuks3f6jkmm7gy2npd9r5
