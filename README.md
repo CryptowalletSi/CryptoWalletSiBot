@@ -1,9 +1,5 @@
 ## CryptoWalletSiBot telegram wallet and on chain tiping bot
 
-Configuration:
-- look at `config.py` for configuration options
-- create `local_config.py` with your custom configuration
-
 Usage instructions:
 - Download Telegram app and register https://Telegram.org
 - A valid telegram username is required: https://telegram.org/faq#usernames-and-telegram-me (If you change your telegram username you will loose access to your coins)
@@ -36,4 +32,8 @@ Available commands:
 Notice: Bot/Wallet is still in development/testing stage. Do not store large amounts of coin on wallet, only what you want to have handy for tips. Wallets are linked to Telegram usernames. If you dont have a telegram username set you will not be able to interact with bot commands, send and recieve tips. If you change your telegram username, you will loose access to your crypto. Make sure you withdraw your coins before you change you telegram username. 
 Bot is experimental open source software so keep that in mind. Bot wallet is not your long term coin storage, personal vault.... Use it for micropayments and telegram tips.
 
-- Support our lead python developer here: ETH and erc20 tokens: 0x0Dcd1f24D9904a5C926F39CA8c012665f8Ec5FEF
+- Support the developers of this bot:
+ - LANA: LTyzH1NXqZ4aZE532cNw9epPMsoHwvs3xE
+ - BTC: 1BVENkHRH9p1UXJREmzV9HnKAMU5enfgMD
+ - ETH and erc20 tokens: 0x0Dcd1f24D9904a5C926F39CA8c012665f8Ec5FEF
+ - BCH: qpessyw3ds7rs22sn99gvvuks3f6jkmm7gy2npd9r5

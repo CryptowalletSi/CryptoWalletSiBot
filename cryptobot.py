@@ -140,7 +140,7 @@ class Cryptobot(captcha.CaptchaMixin):
             raise Exception(f'Invalid amount: {amount}')
 
     def _format_amount(self, amount):
-        return int(float(amount) * (10**TIP_DECIMAL_PLACES)) / (10**TIP_DECIMAL_PLACES)
+        return round(float(amount) * (10**TIP_DECIMAL_PLACES)) / (10**TIP_DECIMAL_PLACES)
 
     def _parse_addr(self, msg, idx):
         try:
