@@ -54,6 +54,8 @@ COMMAND_CONFIG = {
 
 TIP_DECIMAL_PLACES = 4
 
+COMMAND_THROTTLE_USERS = {}
+
 
 class Cryptobot(captcha.CaptchaMixin):
     def __init__(self, telegram_token=config.TELEGRAM_TOKEN):
@@ -89,20 +91,26 @@ class Cryptobot(captcha.CaptchaMixin):
         cmd = None
         try:
             cmd = msg.text.split()[0][1:].split("@")[0]
-            
-            if cmd not in ANON_COMMANDS and not msg.from_user.username:
+            username = msg.from_user.username
+
+            if cmd not in ANON_COMMANDS and not username:
                 raise Exception("You must set a telegram username to use this bot")
             
+            t = COMMAND_THROTTLE_USERS.get(username, 0)
+            if time.time() < t:
+                raise Exception(username + ', I need some time to relax. Wait ' + str(int(t - time.time()) + 1) + ' secs.')
+            COMMAND_THROTTLE_USERS[username] = time.time() + config.COMMAND_THROTTLE_SECONDS
+
             if cmd in ADMIN_COMMANDS and msg.from_user.username not in config.ADMINS:
                 return
             
             if msg.chat.type != 'private' and cmd not in PUBLIC_COMMANDS:
-                raise Exception(msg.from_user.username + ", that command is only available if you talk to me privately")
+                raise Exception(username + ", that command is only available if you talk to me privately")
             
             group_cfg = config.GROUP_CONFIG.get(msg.chat.username)
             if group_cfg:
                 if cmd in group_cfg.get('command_blacklist', []):
-                    raise Exception(msg.from_user.username + ", that command is currently disabled in this group")
+                    raise Exception(username + ", that command is currently disabled in this group")
 
             f = getattr(self, 'cmd_' + cmd, None)
             if f:

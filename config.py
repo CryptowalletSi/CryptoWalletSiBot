@@ -27,7 +27,10 @@ Available commands:
 TELEGRAM_TOKEN = 'changeme'
 
 # Minimum confirmed blocks when calculating account balances
-MINCONF = 0
+MINCONF = 1
+
+# Seconds you have to wait before sending next command to the bot
+COMMAND_THROTTLE_SECONDS = 3
 
 # Implemented coins
 COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO', 'NEVA']
