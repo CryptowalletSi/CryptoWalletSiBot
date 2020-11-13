@@ -17,8 +17,8 @@ from util import round_price
 import captcha
 
 
-COMMANDS = ['start', 'balance', 'deposit', 'withdraw', 'tip', 'price', 'admin', 'test1']
-PUBLIC_COMMANDS = ['tip', 'price', 'captcha']
+COMMANDS = ['start', 'balance', 'deposit', 'withdraw', 'tip', 'p', 'admin', 'test1']
+PUBLIC_COMMANDS = ['tip', 'p', 'captcha']
 ADMIN_COMMANDS = ['admin']
 ANON_COMMANDS = ['captcha']
 
@@ -41,8 +41,8 @@ COMMAND_CONFIG = {
     'tip': {
         'usage': '/tip <@username> <amount> <ticker>',
     },
-    'price': {
-        'usage': '/price <ticker>',
+    'p': {
+        'usage': '/p <ticker>',
     },
     'admin': {
         'usage': '\n'.join([
@@ -264,7 +264,7 @@ class Cryptobot(captcha.CaptchaMixin):
         elif p[1] == 'BTC':
             return [(round_price(p[0] * p_btc[0]), 'USD'), (int(p[0] * (10**8) * 100) / 100, 'sats')]
 
-    def cmd_price(self, bot, update):
+    def cmd_p(self, bot, update):
         msg = update.message
         syms = [x.upper() for x in msg.text.split()[1:]]
         if not syms:
