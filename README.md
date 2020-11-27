@@ -1,6 +1,6 @@
 ## CryptoWalletSiBot telegram wallet and on chain tiping bot
 
-# Bot website: https://bot.cryptowallet.si
+# Bot website: https://bot.cryptowallet.si (in the works)
 
 ## Usage instructions and enabled groups:
 
