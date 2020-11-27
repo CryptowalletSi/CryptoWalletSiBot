@@ -15,7 +15,9 @@
 - JOin NevaCoin telegram: https://t.me/neva_coin
 - Join CryptoWalletSi telegram: https://t.me/CryptoWalletSi
 - Join Tokens.net telegram: https://t.me/TokensNetExchange
-
+- Join Bololex.com telegram : https://t.me/bololexcom
+- Join Bitcoin.si telegram: https://t.me/BitcoinSi
+- Join BAST token telegram: https://t.me/BASTtoken
 
 ## Currently supported coins (Not tokens! Native coins on their own blockchains):
 - LANA  https://github.com/LanaCoin/lanacoin
