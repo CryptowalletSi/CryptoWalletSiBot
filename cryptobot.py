@@ -16,11 +16,7 @@ from errors import ShowUsage, UnknownTicker, RpcError
 from util import round_price
 import captcha
 
-
-COMMANDS = ['start', 'balance', 'deposit', 'withdraw', 'tip', 'p', 'admin', 'test1']
-PUBLIC_COMMANDS = ['tip', 'p', 'captcha']
-ADMIN_COMMANDS = ['admin']
-ANON_COMMANDS = ['captcha']
+from config import COMMANDS, PUBLIC_COMMANDS, ADMIN_COMMANDS, ANON_COMMANDS
 
 COMMAND_CONFIG = {
     'help': {

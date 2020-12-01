@@ -32,6 +32,18 @@ MINCONF = 1
 # Seconds you have to wait before sending next command to the bot
 COMMAND_THROTTLE_SECONDS = 3
 
+# Available bot commands
+COMMANDS = ['start', 'balance', 'deposit', 'withdraw', 'tip', 'p', 'admin', 'test1']
+
+# Commands available in groups
+PUBLIC_COMMANDS = ['tip', 'p', 'captcha']
+
+# Admin commands
+ADMIN_COMMANDS = ['admin']
+
+# Commands that don't require username set
+ANON_COMMANDS = ['p', 'captcha']
+
 # Implemented coins
 COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO', 'NEVA']
 
@@ -77,11 +89,19 @@ COIN_PRICE = {
     'ARCO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/arcobtc/").json()['ask']), 'BTC'),
     'NETKO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/netkousdt/").json()['ask']), 'USD'),
     'NEVA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/nevausdt/").json()['ask']), 'USD'),
+    'C2O': lambda: (float(requests.get("https://api.tokens.net/public/ticker/c2ousdt/").json()['ask']), 'USD'),
+    'DTR': lambda: (float(requests.get("https://api.tokens.net/public/ticker/dtrusdt/").json()['ask']), 'USD'),
+    'ETH': lambda: (float(requests.get("https://api.tokens.net/public/ticker/ethusdt/").json()['ask']), 'USD'),
+    'BCH': lambda: (float(requests.get("https://api.tokens.net/public/ticker/bchusdt/").json()['ask']), 'USD'),
+    'LTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/ltcusdt/").json()['ask']), 'USD'),
+    'XRP': lambda: (float(requests.get("https://api.tokens.net/public/ticker/xrpusdt/").json()['ask']), 'USD'),
+    'XLM': lambda: (float(requests.get("https://api.tokens.net/public/ticker/xlmusdt/").json()['ask']), 'USD'),
 }
 
 # Prices to display on /price command
 GROUP_COINS = {
-    None: ['BTC', 'LANA', 'TAJ', 'ARCO', 'NETKO', 'NEVA'],
+    None: ['LANA', 'TAJ', 'ARCO', 'NETKO', 'NEVA'],
+    'TokensNetExchange': ['BTC', 'LANA', 'ARCO', 'TAJ', 'C2O', 'DTR', 'ETH', 'NETKO', 'NEVA', 'XLM', 'LTC', 'XRP'],
     'LanaCoin': ['LANA'],
     'TajCoin': ['TAJ'],
     'AquariusCoin': ['ARCO'],
