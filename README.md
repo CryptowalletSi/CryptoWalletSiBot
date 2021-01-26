@@ -11,20 +11,15 @@
 - Join TajCoin telegram: https://t.me/TajCoin
 - Join AquariusCoin telegram: https://t.me/AquariusCoin
 - Join OCProtocol telegram: https://t.me/OCProtocol_OCP
-- Join Netko telegram: https://t.me/NetkoCoin
-- JOin NevaCoin telegram: https://t.me/neva_coin
 - Join CryptoWalletSi telegram: https://t.me/CryptoWalletSi
-- Join Bololex.com telegram : https://t.me/bololexcom
-- Join Bitcoin.si telegram: https://t.me/BitcoinSi
-- Join BAST token telegram: https://t.me/BASTtoken
+
 
 ## Currently supported coins (Not tokens! Native coins on their own blockchains):
 - LANA  https://github.com/LanaCoin/lanacoin
 - TAJ https://github.com/Taj-Coin/tajcoin
 - OCP https://github.com/OC-CryptoCurrency/OCP
 - ARCO https://github.com/AquariusNetwork/ARCO
-- NETKO https://github.com/NetkoCoin/netko
-- NEVA https://github.com/Nevacoin/nevacoin
+
     
 ## Available commands:
 * `/start`
