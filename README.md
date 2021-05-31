@@ -12,7 +12,7 @@
 - Join AquariusCoin telegram: https://t.me/AquariusCoin
 - Join OCProtocol telegram: https://t.me/OCProtocol_OCP
 - Join CryptoWalletSi telegram: https://t.me/CryptoWalletSi
-
+- Join CryptoWater telegram: https://t.me/CryptoWaterSi
 
 ## Currently supported coins (Not tokens! Native coins on their own blockchains):
 - LANA  https://github.com/LanaCoin/lanacoin
@@ -38,8 +38,3 @@ Bot is experimental open source software so keep that in mind. Bot wallet is not
 * Join https://t.me/CryptoWalletSi and ask to add your group to the address of whitelisted groups
 
 
-- Support the developers of this bot:
-  - LANA: LTyzH1NXqZ4aZE532cNw9epPMsoHwvs3xE
-  - BTC: 1BVENkHRH9p1UXJREmzV9HnKAMU5enfgMD
-  - ETH and erc20 tokens: 0x0Dcd1f24D9904a5C926F39CA8c012665f8Ec5FEF
-  - BCH: qpessyw3ds7rs22sn99gvvuks3f6jkmm7gy2npd9r5
