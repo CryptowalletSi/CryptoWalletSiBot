@@ -12,8 +12,6 @@ Supported coins:
     - TAJ
     - OCP
     - ARCO
-    - NETKO
-    - NEVA
 
 Available commands:
     /start - shows this message
@@ -45,7 +43,7 @@ ADMIN_COMMANDS = ['admin']
 ANON_COMMANDS = ['p', 'captcha']
 
 # Implemented coins
-COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO', 'NETKO', 'NEVA']
+COIN_SYMBOLS = ['LANA', 'TAJ', 'OCP', 'ARCO']
 
 # Coin configuration
 COIN_CONFIG = {
@@ -82,31 +80,20 @@ COIN_CONFIG = {
 }
 
 # Coin price fetching functions
-COIN_PRICE = {
-    'BTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/btcusdt/").json()['ask']), 'USD'),    
-    'LANA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/lanausdt/").json()['ask']), 'USD'),
-    'TAJ': lambda: (float(requests.get("https://api.tokens.net/public/ticker/tajbtc/").json()['ask']), 'BTC'),
-    'ARCO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/arcobtc/").json()['ask']), 'BTC'),
-    'NETKO': lambda: (float(requests.get("https://api.tokens.net/public/ticker/netkousdt/").json()['ask']), 'USD'),
-    'NEVA': lambda: (float(requests.get("https://api.tokens.net/public/ticker/nevausdt/").json()['ask']), 'USD'),
-    'C2O': lambda: (float(requests.get("https://api.tokens.net/public/ticker/c2ousdt/").json()['ask']), 'USD'),
-    'DTR': lambda: (float(requests.get("https://api.tokens.net/public/ticker/dtrusdt/").json()['ask']), 'USD'),
-    'ETH': lambda: (float(requests.get("https://api.tokens.net/public/ticker/ethusdt/").json()['ask']), 'USD'),
-    'BCH': lambda: (float(requests.get("https://api.tokens.net/public/ticker/bchusdt/").json()['ask']), 'USD'),
-    'LTC': lambda: (float(requests.get("https://api.tokens.net/public/ticker/ltcusdt/").json()['ask']), 'USD'),
-    'XRP': lambda: (float(requests.get("https://api.tokens.net/public/ticker/xrpusdt/").json()['ask']), 'USD'),
-    'XLM': lambda: (float(requests.get("https://api.tokens.net/public/ticker/xlmusdt/").json()['ask']), 'USD'),
+COIN_PRICE = {    
+    'LANA': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/lana-lanacoin?quotes=USD").json()['ask']), 'USD'),
+    'TAJ': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/taj-tajcoin?quotes=USD").json()['ask']), 'BTC'),
+    'ARCO': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/arco-aquariuscoin?quotes=USD").json()['ask']), 'BTC'),
+    'C2O': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/c2o-cryptowater?quotes=USD").json()['ask']), 'USD')
 }
 
 # Prices to display on /price command
 GROUP_COINS = {
     None: ['LANA', 'TAJ', 'ARCO', 'NETKO', 'NEVA'],
-    'TokensNetExchange': ['BTC', 'LANA', 'ARCO', 'TAJ', 'C2O', 'DTR', 'ETH', 'NETKO', 'NEVA', 'XLM', 'LTC', 'XRP'],
     'LanaCoin': ['LANA'],
     'TajCoin': ['TAJ'],
     'AquariusCoin': ['ARCO'],
-    'NetkoCoin': ['NETKO'],
-    'neva_coin': ['NEVA'],
+    'CryptoWaterSi': ['C2O'],
 }
 
 # Group specific config
@@ -117,7 +104,7 @@ GROUP_CONFIG = {
 }
 
 # Groups where captcha feature is active
-CAPTCHA_GROUPS = ['botektest', 'CryptoWaterSi', 'TokensNetExchange', 'OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin', 'NetkoCoin', 'neva_coin']
+CAPTCHA_GROUPS = ['botektest', 'CryptoWaterSi', 'OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin']
 
 # Seconds until new user is kicked from a group
 CAPTCHA_SECONDS = 1 * 60
