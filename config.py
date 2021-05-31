@@ -81,10 +81,10 @@ COIN_CONFIG = {
 
 # Coin price fetching functions
 COIN_PRICE = {    
-    'LANA': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/lana-lanacoin?quotes=USD").json()['ask']), 'USD'),
-    'TAJ': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/taj-tajcoin?quotes=USD").json()['ask']), 'BTC'),
-    'ARCO': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/arco-aquariuscoin?quotes=USD").json()['ask']), 'BTC'),
-    'C2O': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/c2o-cryptowater?quotes=USD").json()['ask']), 'USD')
+    'LANA': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/lana-lanacoin?quotes=USD").json()['quotes']['USD']['price']), 'USD')
+    'TAJ': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/taj-tajcoin?quotes=USD").json()['quotes']['USD']['price']), 'USD')
+    'ARCO': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/arco-aquariuscoin?quotes=USD").json()['quotes']['USD']['price']), 'USD')
+    'C2O': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/c2o-cryptowater?quotes=USD").json()['quotes']['USD']['price']), 'USD')
 }
 
 # Prices to display on /price command
