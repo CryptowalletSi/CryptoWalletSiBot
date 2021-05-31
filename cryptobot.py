@@ -267,7 +267,7 @@ class Cryptobot(captcha.CaptchaMixin):
             syms = config.GROUP_COINS.get(msg.chat.username, [])
         if not syms:
             raise ShowUsage()
-        s = 'Prices from <a href="https://platform.tokens.net/register/?r=51649F"><i>Tokens.net</i></a>\n'
+        s = 'Prices from <a href="https://coinpaprika.com"><i>Coinpaprika.com</i></a>\n'
         for sym in syms:
             prices = self._get_prices(sym)
             s += ('1 {} = '.format(sym) + ' or '.join('<b>{} {}</b>'.format(p[0], p[1]) for p in prices) + '\n')
