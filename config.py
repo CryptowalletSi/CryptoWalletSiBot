@@ -67,16 +67,6 @@ COIN_CONFIG = {
         'name': 'AquariusCoin',
         'rpc_url': 'http://user:pass@localhost:6206/',
     },
-    'NETKO': {
-        'symbol': 'NETKO',
-        'name': 'Netko',
-        'rpc_url': 'http://user:pass@localhost:25970',
-    },
-    'NEVA': {
-        'symbol': 'NEVA',
-        'name': 'NevaCoin',
-        'rpc_url': 'http://user:pass@localhost:3791',
-    },
 }
 
 # Coin price fetching functions
@@ -89,11 +79,10 @@ COIN_PRICE = {
 
 # Prices to display on /price command
 GROUP_COINS = {
-    None: ['LANA', 'TAJ', 'ARCO', 'NETKO', 'NEVA'],
+    None: ['LANA', 'TAJ', 'ARCO'],
     'LanaCoin': ['LANA'],
     'TajCoin': ['TAJ'],
     'AquariusCoin': ['ARCO'],
-    'CryptoWaterSi': ['C2O'],
 }
 
 # Group specific config
@@ -104,7 +93,7 @@ GROUP_CONFIG = {
 }
 
 # Groups where captcha feature is active
-CAPTCHA_GROUPS = ['botektest', 'CryptoWaterSi', 'OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin']
+CAPTCHA_GROUPS = ['OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin']
 
 # Seconds until new user is kicked from a group
 CAPTCHA_SECONDS = 1 * 60
