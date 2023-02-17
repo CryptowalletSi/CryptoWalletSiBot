@@ -12,7 +12,6 @@
 - Join AquariusCoin telegram: https://t.me/AquariusCoin
 - Join OCProtocol telegram: https://t.me/OCProtocol_OCP
 - Join CryptoWalletSi telegram: https://t.me/CryptoWalletSi
-- Join CryptoWater telegram: https://t.me/CryptoWaterSi
 
 ## Currently supported coins (Not tokens! Native coins on their own blockchains):
 - LANA  https://github.com/LanaCoin/lanacoin
