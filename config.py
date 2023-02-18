@@ -69,29 +69,6 @@ COIN_CONFIG = {
     },
 }
 
-# Coin price fetching functions
-COIN_PRICE = {    
-    'LANA': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/lana-lanacoin?quotes=USD").json()['quotes']['USD']['price']), 'USD')
-    'TAJ': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/taj-tajcoin?quotes=USD").json()['quotes']['USD']['price']), 'USD')
-    'ARCO': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/arco-aquariuscoin?quotes=USD").json()['quotes']['USD']['price']), 'USD')
-    'C2O': lambda: (float(requests.get("https://api.coinpaprika.com/v1/tickers/c2o-cryptowater?quotes=USD").json()['quotes']['USD']['price']), 'USD')
-}
-
-# Prices to display on /price command
-GROUP_COINS = {
-    None: ['LANA', 'TAJ', 'ARCO'],
-    'LanaCoin': ['LANA'],
-    'TajCoin': ['TAJ'],
-    'AquariusCoin': ['ARCO'],
-}
-
-# Group specific config
-GROUP_CONFIG = {
-    'TokensNetExchange': {
-        'command_blacklist': [],
-    },
-}
-
 # Groups where captcha feature is active
 CAPTCHA_GROUPS = ['OCProtocol_OCP', 'LanaCoin', 'TajCoin', 'AquariusCoin']
 
