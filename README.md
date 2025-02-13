@@ -1,24 +1,4 @@
 ## CryptoWalletSiBot telegram wallet and on chain tiping bot
-
-# Bot website: https://bot.cryptowallet.si (in the works)
-
-## Usage instructions and enabled groups:
-
-- Download Telegram app and register https://Telegram.org
-- A valid telegram username is required: https://telegram.org/faq#usernames-and-telegram-me (If you change your telegram username you will loose access to your coins)
-- Talk to Bot in private https://t.me/CryptoWalletSiBot
-- Join LanaCoin telegram: https://t.me/LanaCoin 
-- Join TajCoin telegram: https://t.me/TajCoin
-- Join AquariusCoin telegram: https://t.me/AquariusCoin
-- Join OCProtocol telegram: https://t.me/OCProtocol_OCP
-- Join CryptoWalletSi telegram: https://t.me/CryptoWalletSi
-
-## Currently supported coins (Not tokens! Native coins on their own blockchains):
-- LANA  https://github.com/LanaCoin/lanacoin
-- TAJ https://github.com/Taj-Coin/tajcoin
-- OCP https://github.com/OC-CryptoCurrency/OCP
-- ARCO https://github.com/AquariusNetwork/ARCO
-
     
 ## Available commands:
 * `/start`
